@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, useEffect } from 'react';
 import challenges from '../../challenges.json';
 // reactNode aceita qualquer elemento filho
 
@@ -10,16 +10,15 @@ interface ChallengesProviderProps {
 interface Challenge {
   type: 'body' | 'eye';
   description: string;
-  focopraticagrupo
   amount: number;
 }
 
 interface ChallengesContextData {
   level: number;
-  levelUp: number;
+  levelUp: () => void;
   currentExperience: number;
   activeChallenge: Challenge;
-  challengesCompleted: () => void;
+  challengesCompleted: number;
   startNewChallenge: () => void;
 }
 
@@ -33,6 +32,11 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
   const [challengesCompleted, setChallengesCompleted] = useState(0)
   const [activeChallenge, setActiveChallenge] = useState(null);
 
+  useEffect(() => {
+    Notification.requestPermission();
+    // permissão para mostrar notificação, 'granted' ou não 
+  }, []);
+
   function levelUp() {
     setLevel(level + 1);
   }
@@ -42,6 +46,15 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
     const challenge = challenges[randomChallegenIndex];
 
     setActiveChallenge(challenge);
+
+    // new Audio('nomearquivo').play(); se tiver na pasta public posso só colocar /nomearquivo.mp3
+
+    if (Notification.permission === 'granted') {
+      new Notification('Novo desafio', {
+        body: 'Valendo ...xp'
+        // mdn notification https://developer.mozilla.org/pt-BR/docs/Web/API/notificacoes
+      })
+    }
   }
 
   return (
