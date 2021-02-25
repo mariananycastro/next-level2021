@@ -1,0 +1,53 @@
+.completedChallenges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* justify-content: space-evenly; */
+
+  margin: 3.5rem 0;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #d7d8da;
+
+  font-weight: 500;
+}
+
+.completedChallenges span:first-child {
+  font-size: 1.25rem;
+}
+
+
+.countdownContainer > button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.countDownButton {
+  width: 100%;
+  height: 5rem;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+  border: 0;
+  border-radius: 5px;
+
+  background: burlywood;
+
+  transition: filter 0.2s;
+}
+
+.countDownButton:not(:disabled):hover {
+  /* como utilizar o not disable */
+  background: purple;
+
+  /* ou só mudar o brightness */
+  filter: brightness(0.9);
+}
+
+.countDownButton:disabled {
+  background: pink;
+  cursor: not-allowed;
+}
