@@ -14,3 +14,6 @@ function ExperienceBar() {
 }
 
 export default ExperienceBar
+
+//   https://javascript.info/xmlhttprequest
+  // requester status
